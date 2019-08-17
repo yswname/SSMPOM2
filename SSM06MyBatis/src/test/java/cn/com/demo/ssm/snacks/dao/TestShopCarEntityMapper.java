@@ -23,9 +23,10 @@ public class TestShopCarEntityMapper {
 
     @Test
     public void testSearchByUrId() {
-        List<ShopCarEntity> shopCarList = this.shopCarMapper.searchByUrId(1);
+        List<ShopCarEntity> shopCarList = this.shopCarMapper.searchByUrId(2);
         for (ShopCarEntity s : shopCarList) {
-            System.out.println(s.getShcFdId());
+            System.out.print(s.getShcFdId() + "   ");
+            System.out.println(s.getFoods().getFdName());
         }
     }
 

@@ -2,6 +2,7 @@ package cn.com.demo.ssm.snacks.dao;
 
 import cn.com.demo.ssm.snacks.entity.ShopCarEntity;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.mapping.FetchType;
 import org.apache.ibatis.type.JdbcType;
 
 import java.util.List;
@@ -16,6 +17,12 @@ public interface ShopCarEntityMapper {
 
     // getItems？--》或用户Id的ShopItem对象
     @Select("select * from snacks_shop_car where shc_ur_id=#{urId}")
+    @Results({
+            @Result(property = "shcFdId", column = "shc_fd_id"),
+            @Result(property = "foods",
+                    column = "shc_fd_id",
+                    one = @One(select = "cn.com.demo.ssm.snacks.dao.FoodsEntityMapper.selectByPrimaryKey", fetchType = FetchType.LAZY))
+    })
     public List<ShopCarEntity> searchByUrId(int urId);
 
     // 商品数量--》某个用户的每种商品数量的和

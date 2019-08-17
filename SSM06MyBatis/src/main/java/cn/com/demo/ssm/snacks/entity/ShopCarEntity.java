@@ -9,12 +9,21 @@ public class ShopCarEntity implements Serializable {
     private Integer shcUrId;
 
     private Integer shcFdId;
+    private FoodsEntity foods;
 
     private Integer shcCount;
 
     private Date shcAddTime;
 
     private static final long serialVersionUID = 1L;
+
+    public FoodsEntity getFoods() {
+        return foods;
+    }
+
+    public void setFoods(FoodsEntity foods) {
+        this.foods = foods;
+    }
 
     public Integer getShcId() {
         return shcId;
