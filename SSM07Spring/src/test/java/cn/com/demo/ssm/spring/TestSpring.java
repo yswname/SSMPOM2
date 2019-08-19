@@ -1,5 +1,6 @@
 package cn.com.demo.ssm.spring;
 
+import cn.com.demo.ssm.spring.dao.IUserDAO;
 import cn.com.demo.ssm.spring.service.impl.UserServiceImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -12,5 +13,8 @@ public class TestSpring {
         UserServiceImpl userService = (UserServiceImpl) ctx.getBean("userService");
         boolean bool = userService.verify("zhangsan", "123456");
         System.out.println(bool);
+
+        IUserDAO userDAO = ctx.getBean("userDAO", IUserDAO.class);
+        System.out.println(userDAO);
     }
 }
