@@ -6,6 +6,10 @@ import cn.com.demo.ssm.spring.dao.impl.UserDAOImpl;
 public class UserServiceImpl {
     private IUserDAO userDAO = new UserDAOImpl();
 
+    public UserServiceImpl() {
+        System.out.println("********************");
+    }
+
     public boolean verify(String userName, String password) {
         boolean bool = false;
         // 查找数据库中的用户对象（包含数据库中密码）

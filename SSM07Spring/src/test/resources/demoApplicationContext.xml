@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="demoService1" class="cn.com.demo.ssm.spring.service.impl.DemoService">
+        <property name="testInt" value="18"/>
+        <property name="testString" value="zhangsan"/>
+        <property name="userDAO" ref="userDAO"/>
+
+        <property name="testList">
+            <list>
+                <value type="int">18</value>
+                <value>zhangsan</value>
+                <ref bean="userDAO"></ref>
+            </list>
+        </property>
+
+        <property name="testMap">
+            <map>
+                <entry key="zhangsan" value="18"></entry>
+                <entry key="lisi">
+                    <value type="int">20</value>
+                </entry>
+                <entry>
+                    <key>
+                        <value type="int">30</value>
+                    </key>
+                    <value>18</value>
+                </entry>
+                <entry>
+                    <key>
+                        <ref bean="userDAO"></ref>
+                    </key>
+                    <value>hello</value>
+                </entry>
+            </map>
+        </property>
+
+        <property name="testProps">
+            <props>
+                <prop key="zhangsan">18</prop>
+                <prop key="20">lisi</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="demoService2" class="cn.com.demo.ssm.spring.service.impl.DemoService">
+        <constructor-arg type="int">
+            <value>18</value>
+        </constructor-arg>
+        <constructor-arg type="java.lang.String">
+            <value>zhangsan</value>
+        </constructor-arg>
+    </bean>
+
+
+    <bean id="demoService3" class="cn.com.demo.ssm.spring.service.impl.DemoService" scope="singleton">
+        <constructor-arg ref="userDAO"/>
+    </bean>
+    <alias name="demoService3" alias="abc"/>
+
+    <bean id="userDAO" class="cn.com.demo.ssm.spring.dao.impl.UserDAOImpl"/>
+    <!--调用类的静态方法获取对象-->
+    <bean id="daoFactory" class="cn.com.demo.ssm.spring.dao.DAOFactory" factory-method="getInstance"/>
+
+    <bean id="userDAO2" class="cn.com.demo.ssm.spring.dao.DAOFactory" factory-bean="daoFactory"
+          factory-method="createUserDAO"/>
+</beans>
