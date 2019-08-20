@@ -5,9 +5,14 @@ import cn.com.demo.ssm.spring.dao.IUserDAO;
 public class UserServiceImpl {
     private IUserDAO userDAO;
 
-    public UserServiceImpl() {
+    private UserServiceImpl(int a, String b) {
         System.out.println("********************");
     }
+
+//    public UserServiceImpl(IUserDAO userDAO) {
+//        System.out.println("invoke UserServiceImpl(IUserDAO)");
+//        this.userDAO = userDAO;
+//    }
 
     public boolean verify(String userName, String password) {
         boolean bool = false;
