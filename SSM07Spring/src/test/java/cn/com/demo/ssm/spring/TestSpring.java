@@ -1,25 +1,25 @@
 package cn.com.demo.ssm.spring;
 
-import cn.com.demo.ssm.spring.service.impl.DemoService;
+import cn.com.demo.ssm.spring.po.Person;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.Map;
-import java.util.Set;
 
 public class TestSpring {
     public static void main(String[] args) {
         // 创建一个Spring容器对象，对象在初始化的时候，自动读取/解析xml中的信息
         ApplicationContext ctx = new ClassPathXmlApplicationContext("demoApplicationContext.xml");
+        Person person = ctx.getBean(Person.class);
+        System.out.println(person.getCard().getAddress().getCity());
 
-        DemoService demoService1 = ctx.getBean("demoService1", DemoService.class);
-        Map map = demoService1.getTestMap();
-        Set<Map.Entry> entrys = map.entrySet();
-        for (Map.Entry entry : entrys) {
-            Object key = entry.getKey();
-            Object value = entry.getValue();
-            System.out.println(key.getClass().getName() + ":" + key + "--->" + value.getClass().getName() + ":" + value);
-        }
+//        DemoService demoService1 = ctx.getBean("demoService1", DemoService.class);
+//        Map map = demoService1.getTestMap();
+//        Set<Map.Entry> entrys = map.entrySet();
+//        for (Map.Entry entry : entrys) {
+//            Object key = entry.getKey();
+//            Object value = entry.getValue();
+//            System.out.println(key.getClass().getName() + ":" + key + "--->" + value.getClass().getName() + ":" + value);
+//        }
 //        List list = demoService1.getTestList();
 //        for (Object obj : list) {
 //            System.out.println(obj.getClass().getName() + ",,," + obj);

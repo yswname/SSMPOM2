@@ -1,10 +1,9 @@
 package cn.com.demo.ssm.spring.service.impl;
 
 import cn.com.demo.ssm.spring.dao.IUserDAO;
-import cn.com.demo.ssm.spring.dao.impl.UserDAOImpl;
 
 public class UserServiceImpl {
-    private IUserDAO userDAO = new UserDAOImpl();
+    private IUserDAO userDAO;
 
     public UserServiceImpl() {
         System.out.println("********************");
@@ -19,5 +18,10 @@ public class UserServiceImpl {
         bool = dbPassword.equals(password);
         // 返回验证结果
         return bool;
+    }
+
+    public void setUserDAO(IUserDAO userDAO) {
+        System.out.println("setter  userDAO!!!!!!!!!!");
+        this.userDAO = userDAO;
     }
 }

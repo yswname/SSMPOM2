@@ -55,6 +55,7 @@
 
 
     <bean id="demoService3" class="cn.com.demo.ssm.spring.service.impl.DemoService" scope="singleton">
+        <!--根据userDAO从容器中获取一个对象，注入到当前参数-->
         <constructor-arg ref="userDAO"/>
     </bean>
     <alias name="demoService3" alias="abc"/>
@@ -65,4 +66,19 @@
 
     <bean id="userDAO2" class="cn.com.demo.ssm.spring.dao.DAOFactory" factory-bean="daoFactory"
           factory-method="createUserDAO"/>
+
+    <bean id="demoService4" class="cn.com.demo.ssm.spring.service.impl.DemoService">
+        <property name="userDAO">
+            <!--直接创建一个新对象，注入到userDAO属性中-->
+            <bean class="cn.com.demo.ssm.spring.dao.impl.UserDAOImpl"/>
+        </property>
+    </bean>
+    <bean id="person" class="cn.com.demo.ssm.spring.po.Person">
+        <property name="card.address.city" value="长沙"/>
+    </bean>
+
+    <bean id="userDAO8" class="cn.com.demo.ssm.spring.dao.impl.UserDAOImpl"/>
+    <bean id="userService8" class="cn.com.demo.ssm.spring.service.impl.UserServiceImpl">
+        <property name="userDAO" ref="userDAO8"/>
+    </bean>
 </beans>
