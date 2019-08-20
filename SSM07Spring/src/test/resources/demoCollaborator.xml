@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/aop
-       http://www.springframework.org/schema/aop/spring-aop.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
     <!--目标-->
     <bean id="userService" class="cn.com.demo.ssm.spring.service.impl.UserServiceImpl" autowire="constructor"/>
     <bean id="userDAO3" class="cn.com.demo.ssm.spring.dao.impl.UserDAOImpl"/>
     <!--副方面-->
     <bean id="logService" class="cn.com.demo.ssm.spring.service.impl.LogServiceImpl"/>
 
-
     <aop:config>
         <!--切入点-->
         <aop:pointcut id="testPointcut" expression="execution(* cn.com.demo.ssm.spring.service.impl.*.*(..))"/>
         <!--切面-->
         <aop:aspect id="myAspect" ref="logService">
-            <!--封装通知 并 织入-->
-            <aop:before method="log" pointcut-ref="testPointcut"/>
+            <aop:pointcut id="pointcut2"
+                          expression="execution(* cn.com.demo.ssm.spring.service.impl.*.*(..)) and args(userName,password)"/>
+            <aop:before method="log2" pointcut-ref="pointcut2" arg-names="password ,userName"/>
+            <!--将logService里面的log方法封装成通知 并 织入到切入点-->
+            <aop:around method="testArround" pointcut-ref="testPointcut"/>
         </aop:aspect>
+
     </aop:config>
 </beans>

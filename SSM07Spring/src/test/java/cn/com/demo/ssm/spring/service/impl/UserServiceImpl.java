@@ -27,6 +27,8 @@ public class UserServiceImpl implements IUserService {
         // 比较数据库密码
         String dbPassword = "123456";
         bool = dbPassword.equals(password);
+        String str = null;
+        //str.toString();
         // 返回验证结果
         return bool;
     }
