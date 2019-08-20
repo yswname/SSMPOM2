@@ -1,18 +1,24 @@
 package cn.com.demo.ssm.spring.service.impl;
 
 import cn.com.demo.ssm.spring.dao.IUserDAO;
+import cn.com.demo.ssm.spring.service.IUserService;
 
-public class UserServiceImpl {
+public class UserServiceImpl implements IUserService {
     private IUserDAO userDAO;
+
+    public UserServiceImpl() {
+        System.out.println("default constructor");
+    }
+
 
     private UserServiceImpl(int a, String b) {
         System.out.println("********************");
     }
 
-//    public UserServiceImpl(IUserDAO userDAO) {
-//        System.out.println("invoke UserServiceImpl(IUserDAO)");
-//        this.userDAO = userDAO;
-//    }
+    public UserServiceImpl(IUserDAO userDAO) {
+        System.out.println("invoke UserServiceImpl(IUserDAO)");
+        this.userDAO = userDAO;
+    }
 
     public boolean verify(String userName, String password) {
         boolean bool = false;
