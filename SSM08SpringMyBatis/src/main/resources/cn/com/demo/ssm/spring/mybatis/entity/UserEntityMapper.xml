@@ -28,7 +28,8 @@
     delete from dm_user
     where ur_id = #{urId,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" parameterType="cn.com.demo.ssm.spring.mybatis.entity.UserEntity">
+    <insert id="insert" parameterType="cn.com.demo.ssm.spring.mybatis.entity.UserEntity" keyColumn="ur_id"
+            keyProperty="urId" useGeneratedKeys="true">
     insert into dm_user (ur_id, ur_user_name, ur_name, 
       ur_age)
     values (#{urId,jdbcType=INTEGER}, #{urUserName,jdbcType=VARCHAR}, #{urName,jdbcType=VARCHAR}, 

@@ -7,6 +7,8 @@ import java.util.List;
 public interface RoleEntityMapper {
     List<RoleEntity> findByUrId(Integer urId);
 
+    RoleEntity findByRlName(String rlName);
+
     int deleteByPrimaryKey(Integer rlId);
 
     int insert(RoleEntity record);

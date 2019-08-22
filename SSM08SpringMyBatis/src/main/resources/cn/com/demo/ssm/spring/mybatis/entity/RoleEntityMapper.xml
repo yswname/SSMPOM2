@@ -16,6 +16,13 @@
         select rl.* from dm_role rl , dm_ur_rl_map mp where mp.mp_ur_id=#{urId} and mp.mp_rl_id=rl.rl_id
     </select>
 
+    <select id="findByRlName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from dm_role
+        where rl_name = #{rlName,jdbcType=VARCHAR}
+    </select>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -26,7 +33,8 @@
     delete from dm_role
     where rl_id = #{rlId,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" parameterType="cn.com.demo.ssm.spring.mybatis.entity.RoleEntity">
+    <insert id="insert" parameterType="cn.com.demo.ssm.spring.mybatis.entity.RoleEntity" useGeneratedKeys="true"
+            keyColumn="rl_id" keyProperty="rlId">
     insert into dm_role (rl_id, rl_name)
     values (#{rlId,jdbcType=INTEGER}, #{rlName,jdbcType=VARCHAR})
   </insert>
