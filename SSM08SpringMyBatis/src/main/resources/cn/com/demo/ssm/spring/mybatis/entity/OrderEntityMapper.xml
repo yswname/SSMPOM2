@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.demo.ssm.spring.mybatis.dao.OrderEntityMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.demo.ssm.spring.mybatis.entity.OrderEntity" >
+    <id column="od_id" property="odId" jdbcType="INTEGER" />
+    <result column="od_ur_id" property="odUrId" jdbcType="INTEGER" />
+    <result column="od_name" property="odName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    od_id, od_ur_id, od_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dm_order
+    where od_id = #{odId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dm_order
+    where od_id = #{odId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.demo.ssm.spring.mybatis.entity.OrderEntity" >
+    insert into dm_order (od_id, od_ur_id, od_name
+      )
+    values (#{odId,jdbcType=INTEGER}, #{odUrId,jdbcType=INTEGER}, #{odName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.demo.ssm.spring.mybatis.entity.OrderEntity" >
+    insert into dm_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="odId != null" >
+        od_id,
+      </if>
+      <if test="odUrId != null" >
+        od_ur_id,
+      </if>
+      <if test="odName != null" >
+        od_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="odId != null" >
+        #{odId,jdbcType=INTEGER},
+      </if>
+      <if test="odUrId != null" >
+        #{odUrId,jdbcType=INTEGER},
+      </if>
+      <if test="odName != null" >
+        #{odName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.demo.ssm.spring.mybatis.entity.OrderEntity" >
+    update dm_order
+    <set >
+      <if test="odUrId != null" >
+        od_ur_id = #{odUrId,jdbcType=INTEGER},
+      </if>
+      <if test="odName != null" >
+        od_name = #{odName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where od_id = #{odId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.demo.ssm.spring.mybatis.entity.OrderEntity" >
+    update dm_order
+    set od_ur_id = #{odUrId,jdbcType=INTEGER},
+      od_name = #{odName,jdbcType=VARCHAR}
+    where od_id = #{odId,jdbcType=INTEGER}
+  </update>
+</mapper>

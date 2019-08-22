@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.demo.ssm.spring.mybatis.dao.RoleEntityMapper">
+    <resultMap id="BaseResultMap" type="cn.com.demo.ssm.spring.mybatis.entity.RoleEntity">
+        <id column="rl_id" property="rlId" jdbcType="INTEGER"/>
+        <result column="rl_name" property="rlName" jdbcType="VARCHAR"/>
+
+        <collection property="userList" column="rl_id" ofType="UserEntity"
+                    select="cn.com.demo.ssm.spring.mybatis.dao.UserEntityMapper.findByRlId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    rl_id, rl_name
+  </sql>
+
+    <select id="findByUrId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select rl.* from dm_role rl , dm_ur_rl_map mp where mp.mp_ur_id=#{urId} and mp.mp_rl_id=rl.rl_id
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from dm_role
+        where rl_id = #{rlId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dm_role
+    where rl_id = #{rlId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="cn.com.demo.ssm.spring.mybatis.entity.RoleEntity">
+    insert into dm_role (rl_id, rl_name)
+    values (#{rlId,jdbcType=INTEGER}, #{rlName,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="cn.com.demo.ssm.spring.mybatis.entity.RoleEntity">
+        insert into dm_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="rlId != null">
+                rl_id,
+            </if>
+            <if test="rlName != null">
+                rl_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="rlId != null">
+                #{rlId,jdbcType=INTEGER},
+            </if>
+            <if test="rlName != null">
+                #{rlName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.com.demo.ssm.spring.mybatis.entity.RoleEntity">
+        update dm_role
+        <set>
+            <if test="rlName != null">
+                rl_name = #{rlName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where rl_id = #{rlId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.com.demo.ssm.spring.mybatis.entity.RoleEntity">
+    update dm_role
+    set rl_name = #{rlName,jdbcType=VARCHAR}
+    where rl_id = #{rlId,jdbcType=INTEGER}
+  </update>
+</mapper>
