@@ -37,9 +37,13 @@ public class UserServiceImpl implements IUserService {
                     RlUrMapEntity rlUr = new RlUrMapEntity();
                     rlUr.setMpRlId(dbRole.getRlId());
                     rlUr.setMpUrId(userEntity.getUrId());
+
+                    this.rlUrMapper.insert(rlUr);
                 }
             }
             //    如果没有，不用做其它事情了
+            String str = null;
+            //str.toString();
         }
     }
 
