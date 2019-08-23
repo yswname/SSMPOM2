@@ -6,7 +6,7 @@
     <!--加载db.properties资源文件-->
     <context:property-placeholder location="classpath:db.properties" ignore-unresolvable="true"/>
     <!--数据源对象-->
-    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" scope="singleton">
         <property name="driverClassName" value="${jdbc.driverClass}"/>
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.user}"/>
