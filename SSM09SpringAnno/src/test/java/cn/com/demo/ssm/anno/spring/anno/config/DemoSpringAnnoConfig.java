@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
         excludeFilters = {@ComponentScan.Filter(type = FilterType.CUSTOM, value = MyComponentFilter.class)}, useDefaultFilters = false)
 @PropertySource(value = "classpath:/config.properties")// 告知ioc容器初始化的时候，加载属性文件
 // 中ioc容器初始化的时候，扫哪些类
+@EnableAspectJAutoProxy
 public class DemoSpringAnnoConfig {
     @Bean
     @Scope(value = "singleton")
@@ -20,7 +21,7 @@ public class DemoSpringAnnoConfig {
 
     @Bean
     @Scope(value = "singleton")
-    //@Primary// 多个同类的对，无从选择，选primary
+    @Primary// 多个同类的对，无从选择，选primary
     public IDemoDAO createDemoDAO2() {
         return new DemoDAOImpl();
     }

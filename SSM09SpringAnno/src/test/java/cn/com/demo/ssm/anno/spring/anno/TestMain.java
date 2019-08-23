@@ -9,6 +9,7 @@ public class TestMain {
     public static void main(String[] args) {
         ApplicationContext ctx = new AnnotationConfigApplicationContext(DemoSpringAnnoConfig.class);
         IDemoService demoService = ctx.getBean(IDemoService.class);
-        demoService.business();
+//        demoService.business();
+        demoService.business("zhangsan", "123456");
     }
 }

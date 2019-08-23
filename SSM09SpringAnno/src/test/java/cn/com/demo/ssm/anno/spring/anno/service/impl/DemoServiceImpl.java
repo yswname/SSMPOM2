@@ -17,6 +17,12 @@ public class DemoServiceImpl implements IDemoService {
     private IDemoDAO demoDAO;
 
     @Override
+    public boolean business(String userName, String password) {
+        System.out.println("execute business(" + userName + "," + password + ")");
+        return password != null;
+    }
+
+    @Override
     public void business() {
         System.out.println("execute DemoServiceImpl.business()");
         this.demoDAO.save();
