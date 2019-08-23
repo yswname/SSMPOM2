@@ -18,6 +18,7 @@
         <module>SSM06DyncProxy</module>
         <module>SSM07Spring</module>
         <module>SSM08SpringMyBatis</module>
+        <module>SSM09SpringAnno</module>
     </modules>
 
     <name>SSMPOM</name>
