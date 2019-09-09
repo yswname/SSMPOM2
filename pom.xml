@@ -20,6 +20,7 @@
         <module>SSM08SpringMyBatis</module>
         <module>SSM09SpringAnno</module>
         <module>SSM10MVC01</module>
+        <module>SSM10MVC02</module>
     </modules>
 
     <name>SSMPOM</name>
