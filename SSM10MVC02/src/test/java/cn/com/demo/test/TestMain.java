@@ -9,6 +9,7 @@ public class TestMain {
     // 模拟Tomcat
     public static void main(String[] args) {
         ServiceLoader<IServlet> serviceLoader = ServiceLoader.load(IServlet.class);
+
         Iterator<IServlet> servlets = serviceLoader.iterator();
         // 初始化Servlet对象（响应/hello）
         IServlet servlet = null;
