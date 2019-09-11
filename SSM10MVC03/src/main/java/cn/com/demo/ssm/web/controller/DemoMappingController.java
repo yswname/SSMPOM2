@@ -1,6 +1,7 @@
 package cn.com.demo.ssm.web.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,6 +30,11 @@ public class DemoMappingController {
     @RequestMapping(value = "/test4", params = "!age")
     public void test4() {
         System.out.println("test4");
+    }
+
+    @GetMapping("/test/**")
+    public void test5() {
+        System.out.println("test5");
     }
 
 
