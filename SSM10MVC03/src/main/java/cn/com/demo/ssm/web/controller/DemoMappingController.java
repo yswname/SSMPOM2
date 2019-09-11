@@ -1,10 +1,7 @@
 package cn.com.demo.ssm.web.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(value = "/mapping")
@@ -37,5 +34,14 @@ public class DemoMappingController {
         System.out.println("test5");
     }
 
+    @GetMapping("/test/{first}/{second}")
+    public void test6(@PathVariable("second") String name, @PathVariable("first") int age) {
+        System.out.println(name + "," + age);
+    }
+
+    @GetMapping("/{year:\\d\\d\\d\\d\\d}-{month:\\d\\d}-{day:\\d\\d}")// \\d{4}
+    public void test7(@PathVariable("year") int param1, @PathVariable("month") int param2, @PathVariable("day") int param3) {
+        System.out.println(param1 + "-" + param2 + "-" + param3);
+    }
 
 }
