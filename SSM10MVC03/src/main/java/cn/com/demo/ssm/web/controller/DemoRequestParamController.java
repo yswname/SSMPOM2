@@ -2,10 +2,7 @@ package cn.com.demo.ssm.web.controller;
 
 import cn.com.demo.ssm.vo.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -42,5 +39,20 @@ public class DemoRequestParamController {
     @GetMapping("/req3/{age}")
     public void test4(@PathVariable("age") int age) {
         System.out.println("test4=>" + age);
+    }
+
+    // 特殊数据
+    @GetMapping("/header")
+    public void test5(@RequestHeader("Accept-Encoding") String value, @CookieValue("JSESSIONID") String sessionId) {
+        System.out.println("test5->" + value + ",sessinId" + sessionId);
+    }
+
+    // SpringMVC中，默认是不支持带有分号得请求
+    // 要使用Matrix参数得话，需要通知springmvc支持分号请求
+    //   request/req6/42;q=11;r=22
+    @GetMapping("/req6/{petId}")
+    public void test6(@PathVariable String petId, @MatrixVariable int q) {
+        System.out.println(petId);
+        System.out.println(q);
     }
 }
