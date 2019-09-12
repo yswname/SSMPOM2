@@ -55,4 +55,9 @@ public class DemoRequestParamController {
         System.out.println(petId);
         System.out.println(q);
     }
+
+    @PostMapping("/req7")
+    public void test7(@RequestBody User user) {
+        System.out.println("test7->" + user);
+    }
 }
