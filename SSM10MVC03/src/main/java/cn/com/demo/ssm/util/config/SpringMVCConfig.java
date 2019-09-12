@@ -3,16 +3,22 @@ package cn.com.demo.ssm.util.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.util.UrlPathHelper;
+
+import java.nio.charset.Charset;
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @ComponentScan(basePackages = "cn.com.demo.ssm.web.controller")
@@ -48,13 +54,29 @@ public class SpringMVCConfig implements WebMvcConfigurer {
         return resolver;
     }
 
-    @Bean
-    public RequestMappingHandlerAdapter createRequestMappingHandlerAdapter() {
-        RequestMappingHandlerAdapter adapter = new RequestMappingHandlerAdapter();
+    @Override
+    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+        //super.extendMessageConverters(converters);
+        // 解决@ResponseBody乱码问题   response.setContentType("text/html;charset=utf-8")
+        StringHttpMessageConverter httpConverter = new StringHttpMessageConverter(
+                Charset.forName("UTF-8"));
+        httpConverter.setSupportedMediaTypes(Arrays.asList(
+                MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON,
+                MediaType.TEXT_HTML));
+        converters.add(0, httpConverter);// 需要添加到第一个，避免使用前面的msgConverter
 
+        // 响应json
         MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
-        adapter.getMessageConverters().add(jsonConverter);
-
-        return adapter;
+        converters.add(jsonConverter);
     }
+
+//    @Bean
+//    public RequestMappingHandlerAdapter createRequestMappingHandlerAdapter() {
+//        RequestMappingHandlerAdapter adapter = new RequestMappingHandlerAdapter();
+//
+//        MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
+//        adapter.getMessageConverters().add(jsonConverter);
+//
+//        return adapter;
+//    }
 }
