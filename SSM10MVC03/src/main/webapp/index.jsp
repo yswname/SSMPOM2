@@ -42,5 +42,11 @@
 <form action="mapping/test3" method="post">
     <input type="submit" value="submit"/>
 </form>
+
+<form action="/file/upload" method="post" enctype="multipart/form-data">
+    UserName:<input type="text" name="userName"/><br/>
+    Image:<input type="file" name="myFile"/><br/>
+    <input type="submit" value="submit">
+</form>
 </body>
 </html>

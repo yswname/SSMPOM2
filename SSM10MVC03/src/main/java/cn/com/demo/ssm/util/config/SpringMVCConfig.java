@@ -8,6 +8,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.util.ResourceUtils;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -68,6 +69,15 @@ public class SpringMVCConfig implements WebMvcConfigurer {
         // 响应json
         MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
         converters.add(jsonConverter);
+    }
+
+    @Bean(name = "multipartResolver")// beanName固定
+    // 名称固定
+    public CommonsMultipartResolver commonsMultipartResolver() {
+        CommonsMultipartResolver multiResolver = new CommonsMultipartResolver();
+        multiResolver.setMaxUploadSize(10 * 1024 * 1024);
+        multiResolver.setDefaultEncoding("UTF-8");
+        return multiResolver;
     }
 
 //    @Bean
