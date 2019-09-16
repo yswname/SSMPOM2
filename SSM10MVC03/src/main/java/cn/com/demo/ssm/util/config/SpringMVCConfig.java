@@ -1,5 +1,6 @@
 package cn.com.demo.ssm.util.config;
 
+import cn.com.demo.ssm.interceptor.DemoInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -9,10 +10,7 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.util.UrlPathHelper;
@@ -26,6 +24,13 @@ import java.util.List;
 @EnableWebMvc// mvc:annotation-driven
 // 完成了SpringMVC得所有默认配置
 public class SpringMVCConfig implements WebMvcConfigurer {
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        DemoInterceptor demoInter = new DemoInterceptor();
+        InterceptorRegistration registration = registry.addInterceptor(demoInter);
+        registration.addPathPatterns("/demo/demo");
+    }
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         // 设置不需要经过SpringMVC框架过滤的资源，比如js css 和 images等

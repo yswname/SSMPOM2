@@ -20,6 +20,7 @@ public class DemoController {
         mv.addObject("name", name);
         // 调用后面的service
         this.demoService.demo(name);
+        System.out.println("22222222222222222222");
         return mv;
     }
 }

@@ -7,5 +7,8 @@
 </head>
 <body>
 Hello, ${name} 上午好！
+<%
+    System.out.println("4444444444444");
+%>
 </body>
 </html>
