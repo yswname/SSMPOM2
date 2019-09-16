@@ -10,5 +10,8 @@ Hello, ${name} 上午好！
 <%
     System.out.println("4444444444444");
 %>
+<br/>
+${sessionScope.user.userName},${sessionScope.user.name}<br/>
+${requestScope.user.userName}
 </body>
 </html>

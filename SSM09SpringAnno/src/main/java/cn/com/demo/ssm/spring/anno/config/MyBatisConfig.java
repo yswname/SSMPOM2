@@ -12,6 +12,7 @@ import org.springframework.core.env.Environment;
 import javax.sql.DataSource;
 
 @Configuration
+//@MapperScan("mapper的包")
 public class MyBatisConfig implements EnvironmentAware {
     //@Value("${jdbc.url}")
     private String url;

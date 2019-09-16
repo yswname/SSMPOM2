@@ -1,6 +1,7 @@
 package cn.com.demo.ssm.util.config;
 
 import cn.com.demo.ssm.interceptor.DemoInterceptor;
+import cn.com.demo.ssm.interceptor.DemoInterceptor2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -27,8 +28,14 @@ public class SpringMVCConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         DemoInterceptor demoInter = new DemoInterceptor();
+        DemoInterceptor2 demoInter2 = new DemoInterceptor2();
+
+
+        InterceptorRegistration registration2 = registry.addInterceptor(demoInter2);
         InterceptorRegistration registration = registry.addInterceptor(demoInter);
+
         registration.addPathPatterns("/demo/demo");
+        registration2.addPathPatterns("/demo/demo");
     }
 
     @Override
