@@ -22,6 +22,7 @@
         <module>SSM10MVC01</module>
         <module>SSM10MVC02</module>
         <module>SSM10MVC03</module>
+        <module>SSM11SSM</module>
     </modules>
 
     <name>SSMPOM</name>
